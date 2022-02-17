@@ -1,13 +1,12 @@
-import type { Request } from "@sveltejs/kit";
+// import type { Request } from "@sveltejs/kit";
 
-// TODO: Persist in database
 let todos: Todo[] = [];
 
-export const api = (request: Request, todo?: Todo) => {
+export const api = (request, todo?: Todo) => {
   let body = {};
   let status = 500;
 
-  switch (request.method.toUpperCase()) {
+  switch (request.request.method.toUpperCase()) {
     case "GET":
       body = todos;
       status = 200;
@@ -26,7 +25,7 @@ export const api = (request: Request, todo?: Todo) => {
       break;
   }
 
-  if (request.method.toUpperCase() !== "GET") {
+  if (request.request.method.toUpperCase() !== "GET") {
     return {
       status: 303,
       headers: {
