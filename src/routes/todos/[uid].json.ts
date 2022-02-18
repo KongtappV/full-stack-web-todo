@@ -5,9 +5,10 @@ export const del = (request) => {
   return api(request);
 }
 
-// export const patch: RequestHandler<{}, FormData> = (request) => {
-//   return api(request, {
-//     text: request.body.get("text"),
-//     done: request.body.has("done") ? !!request.body.get("done") : undefined
-//   });
-// }
+export const patch = async (request) => {
+  const data = await request.request.formData();
+  return api(request, {
+    text: data.get("text").toString(),
+    done: data.has("done") ? !!data.get("done") : undefined
+  });
+}
