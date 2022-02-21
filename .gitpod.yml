@@ -1,10 +1,9 @@
 image: gitpod/workspace-postgres
 
 tasks:
-  - init: npm install
+  - init: npm install && npm run build
     command: |
       export HMR_HOST=`gp url 3000`
-      echo "Starting dev server..."
       npm run dev
     env:
       DATABASE_URL: postgres://gitpod@localhost/todos
@@ -23,8 +22,9 @@ ports:
 
 vscode:
   extensions:
+    - dbaeumer.vscode-eslint
     - svelte.svelte-vscode
-    - Prisma.prisma
+    - prisma.prisma
 
 github:
   prebuilds:
